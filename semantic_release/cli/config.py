@@ -39,7 +39,12 @@ from semantic_release.commit_parser import (
     ScipyCommitParser,
     TagCommitParser,
 )
-from semantic_release.const import COMMIT_MESSAGE, DEFAULT_COMMIT_AUTHOR, SEMVER_REGEX, PEP440_REGEX
+from semantic_release.const import (
+    COMMIT_MESSAGE,
+    DEFAULT_COMMIT_AUTHOR,
+    PEP440_REGEX,
+    SEMVER_REGEX,
+)
 from semantic_release.errors import (
     DetachedHeadGitError,
     InvalidConfiguration,
@@ -656,7 +661,9 @@ class RuntimeContext:
             try:
                 path, search_text = decl.split(":", maxsplit=1)
                 # VersionDeclarationABC handles path existence check
-                vd = TomlVersionDeclaration(path, search_text, version_compat=branch_config.version_compat)
+                vd = TomlVersionDeclaration(
+                    path, search_text, version_compat=branch_config.version_compat
+                )
             except ValueError as exc:
                 log.exception("Invalid TOML declaration %r", decl)
                 raise InvalidConfiguration(
