@@ -1713,7 +1713,12 @@ def test_version_only_update_files_no_git_actions(
 def test_version_print_last_released_prints_version(
     repo_with_single_branch_angular_commits: Repo, cli_runner: CliRunner
 ):
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
@@ -1734,7 +1739,12 @@ def test_version_print_last_released_prints_released_if_commits(
     repo_with_single_branch_angular_commits.git.add(str(new_file.resolve()))
     repo_with_single_branch_angular_commits.git.commit(m="fix: temp new file")
 
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
@@ -1765,7 +1775,12 @@ def test_version_print_last_released_on_detached_head(
     last_version = "0.1.1"
     repo_with_single_branch_angular_commits.git.checkout("HEAD", detach=True)
 
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
@@ -1783,7 +1798,12 @@ def test_version_print_last_released_on_nonrelease_branch(
     last_version = "0.1.1"
     repo_with_single_branch_angular_commits.create_head("next").checkout()
 
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
@@ -1801,7 +1821,12 @@ def test_version_print_last_released_tag_on_detached_head(
     last_version = "v0.1.1"
     repo_with_single_branch_angular_commits.git.checkout("HEAD", detach=True)
 
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released-tag"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released-tag",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
@@ -1819,7 +1844,12 @@ def test_version_print_last_released_tag_on_nonrelease_branch(
     last_version_tag = "v0.1.1"
     repo_with_single_branch_angular_commits.create_head("next").checkout()
 
-    cli_cmd = [MAIN_PROG_NAME, VERSION_SUBCMD, "--print-last-released-tag"]
+    cli_cmd = [
+        MAIN_PROG_NAME,
+        VERSION_SUBCMD,
+        "--version-compat=semver",
+        "--print-last-released-tag",
+    ]
 
     # Act
     result = cli_runner.invoke(main, cli_cmd[1:])
